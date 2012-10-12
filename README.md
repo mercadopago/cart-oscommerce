@@ -7,7 +7,7 @@
     * osCommerce 2.2
     * osCommerce 2.3
 
-2. Copy this folder to your osCommerce ROOT  installation.
+2. Copy the module folder to your osCommerce ROOT  installation.
 
 ---
 ### Setup Mercadopago
