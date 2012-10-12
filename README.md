@@ -24,11 +24,11 @@
 
 5. Choose the payment methods that you don´t want to accept in your Store:
 
-	![Country Selecion](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodsSelection.png)
+	![Payment Methods Selection](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodsSelection.png)
 
 6. In the next screen, you will see **Mercadopago** listed as a payment method. Now, click on **Edit** on the right bar.
  
-	![Country Selecion](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png)
+	![Payment Method List](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png)
 
 7. Now, is very important to set your ***CLIENT_ID*** and ***CLIENT_SECRET***, and choose the maximum number of installments that you want to accept in your store (the default is 18).
 	
@@ -38,7 +38,7 @@
 
 8. **DO NOT TOUCH** the fields *Country*, *Exclude Methods*, *Cod Status (fields…)*. They were generated for you with the correct values, if you need to change them, is highly recommended that you reinstall the module.
 
-	![Country Selecion](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/DoNotTouch.png)
+	![Do Not Touch](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/DoNotTouch.png)
 
 9. The fields *Sucess Url* and *Pending url* were also generated automatically, but if you're testing in a localhost, it will not work. You can change the address to any of your choice, but can't be localhost.
 
@@ -59,6 +59,6 @@
 
 1. Go to **Mercadopago IPN configuration**:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
-	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
+	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
 
 2. Enter the URL as follow: ***[yourstoreadress.com]***/mercadopago.php
