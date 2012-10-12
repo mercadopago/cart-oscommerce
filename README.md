@@ -32,7 +32,6 @@
 
 7. Now, is very important to set your ***CLIENT_ID*** and ***CLIENT_SECRET***, and choose the maximum number of installments that you want to accept in your store (the default is 18).
 Get your ***CLIENT_ID*** and ***CLIENT_SECRET*** in the following address:
-
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
 	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
 
