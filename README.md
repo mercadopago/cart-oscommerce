@@ -47,7 +47,7 @@
 ***IMPORTANT:***
 *This module will only work with the following currencies:*
 
-* Brasil:
+* Brazil:
 	* BRL (Real)
 	* USD (Dollar)
 * Argentina:
@@ -58,6 +58,6 @@
 
 1. Go to **Mercadopago IPN configuration**:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
-	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
+	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
 
 2. Enter the URL as follow: ***[yourstoreaddress.com]***/mercadopago.php
