@@ -5,7 +5,7 @@
 
 1. Download Mercadopago module:
     * osCommerce 2.2
-    * osCommerce 2.3<br />
+    * osCommerce 2.3
 
 2. Copy the module folder to your osCommerce ROOT installation.
 
@@ -34,7 +34,7 @@
 	
 	Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
-	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)<br />
+	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
 
 8. **DO NOT TOUCH** the fields *Country*, *Exclude Methods*, *Cod Status (fields…)*. They were generated for you with the correct values, if you need to change them, is highly recommended that you reinstall the module.
 
