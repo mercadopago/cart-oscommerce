@@ -17,5 +17,5 @@ define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'País');
 define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Seleccione su país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
 define('MP_ACTIVATION_METHODS_COUNTRY', 'Medios de pago no deseados');
-define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', Formas de pago que NO quiere aceptar');
+define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Formas de pago que NO quiere aceptar');
 ?>
