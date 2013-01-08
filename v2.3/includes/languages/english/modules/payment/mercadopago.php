@@ -9,7 +9,7 @@
 */
 
 define('MODULE_PAYMENT_MERCADOPAGO_TEXT_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Seu meio de pagamento na Internet');
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', '');
 define('MP_ACTIVATION_TITLE', 'Setup MercadoPago');
 define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Location');
 define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Select your country');
