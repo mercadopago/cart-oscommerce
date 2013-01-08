@@ -529,7 +529,6 @@ class mercadopago {
 
     function install() {
 
-        var_dump($_REQUEST['active']);
         $active = (isset($HTTP_GET_VARS['actitve']) ? $HTTP_GET_VARS['actitve'] : '');
         if ($_REQUEST['active'] != 'true') {
             tep_redirect(tep_href_link('mercadopago.php'));
