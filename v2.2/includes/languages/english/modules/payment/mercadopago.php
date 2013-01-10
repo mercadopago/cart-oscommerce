@@ -9,7 +9,7 @@
 */
 
 define('MODULE_PAYMENT_MERCADOPAGO_TEXT_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', '');
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'To get values Client Id and Client Secret, follow: <a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRA</b></a>|<a href=\"https://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARG</b></a>|<a href=\"https://www.mercadopago.com/mlm/herramientas/aplicaciones\" target=\"_blank\" ><b>MEX</b></a>|<a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VEN</b></a>');
 define('MP_ACTIVATION_TITLE', 'Setup MercadoPago');
 define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Location');
 define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Select your country');
