@@ -466,7 +466,7 @@ class mercadopago {
 
         $dados = array(
             'external_reference' => $insert_id, // seu codigo de referencia, i.e. Numero do pedido da sua loja 
-            'currency' => $order->info['currency'], // string Argentina: ARS (peso argentino) ó USD (Dólar estadounidense); Brasil: BRL (Real).
+            'currency' => $order->info['currency'], // string Argentina: ARS (peso argentino) ï¿½ USD (Dï¿½lar estadounidense); Brasil: BRL (Real).
             'title' => $order->products[0]['name'], //string
             'description' => $order->products[0]['name'], // string
             'quantity' => $order->products[0]['qty'], // int 
@@ -580,8 +580,8 @@ class mercadopago {
 
         $country = $_POST['country'];
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Habilitar m&oacute;dulo MercadoPago', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'Verdadeiro', 'Deseja aceitar pagamentos por meio do MercadoPago?', '6', '3', 'tep_cfg_select_option(array(\'Verdadeiro\', \'Falso\'), ', now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your client id <a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRA</b></a>|<a href=\"http://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARG</b></a>', '6','1',now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your client secret <a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRA</b></a>|<a href=\"http://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARG</b></a>','6','2', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your client id', '6','1',now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your client secret','6','2', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Ordem de exibi&ccedil;&atilde;o', 'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER', '1', 'O mais baixo &eacute; exibido primeiro.', '6', '0', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Country','MODULE_PAYMENT_MERCADOPAGO_COUNTRY','Recomended to remove and install the module again if you need to change the country', '6','3','" . $country . "',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Exclude Methods','MODULE_PAYMENT_MERCADOPAGO_METHODS','Recomended to remove and install the module again if you need to change the no accepted methods', '6','3','" . $methods . "',now())");
