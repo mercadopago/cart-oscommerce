@@ -13,8 +13,8 @@ define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Para obtener los valores 
 define('MP_ACTIVATION_TITLE', 'Configurar MercadoPago');
 define('MP_ACTIVATION_TITLE', 'MercadoPago');
 define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', '');
-define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Pa�s');
-define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Seleccione su pa�s');
+define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'País');
+define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Seleccione su país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
 define('MP_ACTIVATION_METHODS_COUNTRY', 'Medios de pago no deseados');
 define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Formas de pago que NO quiere aceptar');

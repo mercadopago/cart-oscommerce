@@ -13,9 +13,9 @@ define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Para obter os valores Cli
 define('MP_ACTIVATION_TITLE', 'Configurar MercadoPago');
 define('MP_ACTIVATION_TITLE', 'MercadoPago');
 define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Seu meio de pagamento na Internet');
-define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Localiza�?o');
-define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Selecione seu pa�s');
+define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Localização');
+define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Selecione seu país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
-define('MP_ACTIVATION_METHODS_COUNTRY', 'Formas de pagamento n?o desejadas');
-define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que voc? n?o deseja aceitar');
+define('MP_ACTIVATION_METHODS_COUNTRY', 'Formas de pagamento não desejadas');
+define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que você não deseja aceitar');
 ?>
