@@ -37,6 +37,8 @@
 	Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
 	* Brasil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
+        * Mexico: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
+        * Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
 
 8. **DO NOT TOUCH** the fields *Country*, *Exclude Methods*, *Cod Status (fields…)*. They were generated for you with the correct values, if you need to change them, is highly recommended that you reinstall the module.
 
@@ -54,6 +56,10 @@
 	* USD (Dollar)
 * Argentina:
 	* ARS (Peso)
+* México:
+	* MXN  (Peso mexicano)
+* Venezuela:
+	* VEB (Peso venezuelano)
 
 ---
 ## Sync your backoffice with Mercadopago (IPN) 
@@ -61,5 +67,8 @@
 1. Go to **Mercadopago IPN configuration**:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/notificaciones](https://www.mercadopago.com/mla/herramientas/notificaciones)
 	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/notificacoes](https://www.mercadopago.com/mlb/ferramentas/notificacoes)
+        * Mexico: [https://www.mercadopago.com/mlm/herramientas/notificaciones](https://www.mercadopago.com/mlm/herramientas/notificaciones)
+        * Venezuela: [https://www.mercadopago.com/mlv/herramientas/notificaciones](https://www.mercadopago.com/mlv/herramientas/notificaciones)
+
 
 2. Enter the URL as follow: ***[yourstoreaddress.com]***/mercadopago.php

@@ -23,6 +23,13 @@ require('includes/modules/payment/mercadopago.php');
 </div>
 <?php if(MODULE_PAYMENT_MERCADOPAGO_COUNTRY == 'MLB'){ ?>
 <img src="images/mercadopago/mercadopagobr.jpg" alt="MercadoPago" title="MercadoPago" />
+
+<?php } else if(MODULE_PAYMENT_MERCADOPAGO_COUNTRY == 'MLM'){?>
+<img src="images/mercadopago/mercadopagomx.jpg" alt="MercadoPago" title="MercadoPago" />
+
+<?php } else if(MODULE_PAYMENT_MERCADOPAGO_COUNTRY == 'MLV'){?>
+<img src="images/mercadopago/mercadopagove.jpg" alt="MercadoPago" title="MercadoPago" />
+
 <?php } else { ?>
 <img src="images/mercadopago/mercadopagoar.jpg" alt="MercadoPago" title="MercadoPago" />
 <?php } ?>
