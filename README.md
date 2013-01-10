@@ -57,9 +57,9 @@
 * Argentina:
 	* ARS (Peso)
 * México:
-        * MEX (Peso mexicano)
+	* MEX (Peso mexicano)
 * Venezuela:
-        * VEN (Peso venezuelano)
+	* VEN (Peso venezuelano)
 
 ---
 ## Sync your backoffice with Mercadopago (IPN) 
