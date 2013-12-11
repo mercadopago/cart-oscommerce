@@ -18,4 +18,16 @@ define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Selecione seu país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
 define('MP_ACTIVATION_METHODS_COUNTRY', 'Formas de pagamento não desejadas');
 define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que você não deseja aceitar');
+
+/*
+  These constants will be used to show informations at:
+  Admin > Modules > Payment > MercadoPago
+
+  @author cadu (dot) rcorrea (at) gmail (dot) com
+*/
+
+define('MP_ADMIN_CREDENTIALS_SELECTION', 'Para obter as credenciais, acesse:');
+define('MP_ADMIN_ENABLE', 'Habilitar módulo MercadoPago');
+
+
 ?>

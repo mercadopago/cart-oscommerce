@@ -174,7 +174,7 @@ Class MPShop extends Basic {
                 "items" => array(
                     array("id" => $data['external_reference'], // updated
                         "title" => $data['title'],
-                        "description" => $data['quantity'] . ' x ' . $data['title'],
+                        "description" => $data['description'],
                         "quantity" => 1,
                         "unit_price" => round($data['amount'], 2),
                         "currency_id" => $data['currency'],
@@ -183,8 +183,23 @@ Class MPShop extends Basic {
                 "payer" => array(
                     "name" => $data['payment_firstname'],
                     "surname" => $data['payment_lastname'],
-                    "email" => $data['email']
+                    "email" => $data['email'],
+                    "phone" => array(
+                        "area_code" => " ",
+                        "number" => $data['phone']),
+                    "address" => array(
+                        "zip_code" => $data['customer_zipcode'],
+                        "street_name" => $data['customer_address'],
+                        "street_number" => " "),
+                    "date_created" => $data['customer_date_created']
                 ),
+                "shipments" => array(
+                    "receiver_address" => array(
+                        "zip_code" => $data['delivery_zipcode'],
+                        "street_name" => $data['delivery_address'],
+                        "street_number" => " ",
+                        "floor" => " ",
+                        "apartment" => " ")),
                 "back_urls" => array(
                     "pending" => $data['pending'],
                     "success" => $data['approved']
@@ -199,9 +214,10 @@ Class MPShop extends Basic {
                 "external_reference" => $data['external_reference'],
                 "items" => array(
                     array("id" => $data['external_reference'], // updated
-                        "title" => $data['title'],
-                        "description" => $data['quantity'] . ' x ' . $data['title'],
+                        "title" => $data["title"],
+                        "description" => $data['description'],
                         "quantity" => 1,
+                        "category_id" => $data["category"],
                         "unit_price" => round($data['amount'], 2),
                         "currency_id" => $data['currency'],
                         "picture_url" => $data['image'],
@@ -209,8 +225,26 @@ Class MPShop extends Basic {
                 "payer" => array(
                     "name" => $data['payment_firstname'],
                     "surname" => $data['payment_lastname'],
-                    "email" => $data['email']
+                    "email" => $data['email'],
+                    "phone" => array(
+                        "area_code" => " ",
+                        "number" => $data['phone']),
+                    "identification" => array(
+                        "type" => "null",
+                        "number" => "null"),
+                    "address" => array(
+                        "zip_code" => $data['customer_zipcode'],
+                        "street_name" => $data['customer_address'],
+                        "street_number" => " "),
+                    "date_created" => $data['customer_date_created']
                 ),
+                "shipments" => array(
+                    "receiver_address" => array(
+                        "zip_code" => $data['delivery_zipcode'],
+                        "street_name" => $data['delivery_address'],
+                        "street_number" => " ",
+                        "floor" => " ",
+                        "apartment" => " ")),
                 "back_urls" => array(
                     "pending" => $data['pending'],
                     "success" => $data['approved']
@@ -223,7 +257,14 @@ Class MPShop extends Basic {
         $url = 'https://api.mercadolibre.com/checkout/preferences?access_token=' . $this->accesstoken;
         $header = array('Content-Type:application/json', 'User-Agent:MercadoPago OsCommerce-2.3 Cart v1.0.0', 'Accept: application/json');
         $dados = $this->DoPost($opt, $url, $header, '201', 'json', 'post');
-        $link = $dados['init_point'];
+
+        /* Return sandbox_init_point or init_point
+        *   Depends what was choosed on admin painel MercadoPago
+        * 
+        * @author Carlos Correa (cadu.rcorrea@gmail.com)
+        */
+        $link = (MODULE_PAYMENT_MERCADOPAGO_SANDBOX == 'true') ? $dados['sandbox_init_point'] : $dados['init_point'];
+
         return $link;
     }
 
@@ -427,7 +468,7 @@ class mercadopago {
 
 //una version mejorada de 29/06
     function selection() {
-        $mercadopago_image = "https://www.mercadopago.com/org-img/MP3/oscommerce/logos_tarjetas_MLB.gif";
+        $mercadopago_image = "http://imgmp.mlstatic.com/org-img/MLB/MP/BANNERS/tipo2_575X40.jpg";
         $fields = array();
         $fields[] = array('title' => 'Modos de pagamento aceitos:',
             'text' => '');
@@ -457,19 +498,24 @@ class mercadopago {
     function after_process() {
         global $insert_id, $order;
         
-//      /  if ($order->info['currency'] != 'BRL' || $order->info['currency'] != 'ARS' || $order->info['currency'] != 'USD'
-
         $dados = array(
             'external_reference' => $insert_id, // seu codigo de referencia, i.e. Numero do pedido da sua loja 
             'currency' => $order->info['currency'], // string Argentina: ARS (peso argentino) � USD (D�lar estadounidense); Brasil: BRL (Real).
             'title' => $order->products[0]['name'], //string
             'description' => $order->products[0]['name'], // string
-            'quantity' => $order->products[0]['qty'], // int 
+            'quantity' => $order->products[0]['qty'], // int
             'image' => 'https://www.mercadopago.com/org-img/MP3/home/logomp3.gif', // Imagem, string
             'amount' => $order->info['total'], //decimal
+            'category' => MODULE_PAYMENT_MERCADOPAGO_CATEGORIES,
             'payment_firstname' => $order->customer['firstname'], // string
             'payment_lastname' => $order->customer['lastname'], // string
             'email' => $order->customer['email_address'], // string
+            'phone' => $order->customer['telephone'],
+            'customer_date_created' => $this->getCustomerDateCreated($order->customer['email_address']),
+            'customer_zipcode' => $order->customer['postcode'],
+            'customer_address' => $order->customer['street_address'],
+            'delivery_zipcode' => $order->delivery['postcode'],
+            'delivery_address' => $order->delivery['street_address'],
             'pending' => MODULE_PAYMENT_MERCADOPAGO_PENDING_URL, // string
             'approved' => MODULE_PAYMENT_MERCADOPAGO_SUCESS_URL, // string 
         );
@@ -480,16 +526,12 @@ class mercadopago {
         tep_session_register('botton');
         $botton = $pagamento->GetCheckout($dados, $exclude, $limit);
 
-        
-
         // unregister session variables used during checkout
         tep_session_unregister('sendto');
         tep_session_unregister('billto');
         tep_session_unregister('shipping');
         tep_session_unregister('payment');
         tep_session_unregister('comments');
-
-
       
         tep_redirect(tep_href_link('mercadopago.php', 'bt=' . trim($botton), 'SSL'));
     }
@@ -504,6 +546,15 @@ class mercadopago {
             $this->_check = tep_db_num_rows($check_query);
         }
         return $this->_check;
+    }
+
+    public function getCustomerDateCreated($customer_email = null) {
+      $customer_info_query = tep_db_query("select ci.customers_info_date_account_created from customers_info ci, customers cu where ci.customers_info_id = cu.customers_id and customers_email_address = '$customer_email'");
+      $customer_info = tep_db_fetch_array($customer_info_query);
+
+      $date_created = $customer_info['customers_info_date_account_created'];
+
+      return date('Y-m-d',$date_created) . "T" . date('H:i:s',$date_created);;
     }
 
     public function getCountries() {
@@ -522,21 +573,27 @@ class mercadopago {
         return $methods;
     }
 
+    public function GetCategories() {
+        $mp = new MPShop();
+        $url = "https://api.mercadolibre.com/item_categories";
+        $header = array('Accept: application/json');
+        $categories = $mp->DoPost(null, $url, $header, '200', 'none', 'get');
+        return $categories;
+    }
+
     function install() {
 
         $active = (isset($HTTP_GET_VARS['actitve']) ? $HTTP_GET_VARS['actitve'] : '');
         if ($_REQUEST['active'] != 'true') {
             tep_redirect(tep_href_link('ext/modules/payment/mercadopago/activation.php'));
         }
+
         $posts = (isset($_POST) ? $_POST : '');
 
-
-        if (!empty($_POST['methods'])) {
-            $methods = '';
-            foreach ($_POST['methods'] as $name) {
-                $methods .= $name . ',';
-            }
-        }
+        // get categories from post parameters
+        // if 'categories' is empty, set default with 'others'
+        // @author Carlos Correa (cadu.rcorrea@gmail.com)
+        $categories = empty($posts["categories"]) ? "others" : $posts['categories'];
 
 // verify if MercadoPago Status is already setup
         $check_query = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADOPAGO [Pending]' limit 1");
@@ -570,17 +627,18 @@ class mercadopago {
         $stcancel = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADOPAGO [Canceled]' limit 1");
         $cancel = tep_db_fetch_array($stcancel);
 
-
-
-
         $country = $_POST['country'];
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Habilitar m&oacute;dulo MercadoPago', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'Verdadeiro', 'Deseja aceitar pagamentos por meio do MercadoPago?', '6', '3', 'tep_cfg_select_option(array(\'Verdadeiro\', \'Falso\'), ', now())");
+
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable MercadoPago module', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'Verdadeiro', 'Deseja aceitar pagamentos por meio do MercadoPago?', '6', '3', 'tep_cfg_select_option(array(\'Verdadeiro\', \'Falso\'), ', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your client id', '6','1',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your client secret','6','2', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Ordem de exibi&ccedil;&atilde;o', 'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER', '1', 'O mais baixo &eacute; exibido primeiro.', '6', '0', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Country','MODULE_PAYMENT_MERCADOPAGO_COUNTRY','Recomended to remove and install the module again if you need to change the country', '6','3','" . $country . "',now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Exclude Methods','MODULE_PAYMENT_MERCADOPAGO_METHODS','Recomended to remove and install the module again if you need to change the no accepted methods', '6','3','" . $methods . "',now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('Limit installments','MODULE_PAYMENT_MERCADOPAGO_LIMIT','Limit the number of payments','18','6','5','tep_cfg_select_option(array(\'18\',\'15\',\'12\',\'9\',\'6\',\'3\',\'1\'), ', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Exclude Methods','MODULE_PAYMENT_MERCADOPAGO_METHODS','Recomended to remove and install the module again if you need to change the no accepted methods', '6','3','" . $posts['methods'] . "',now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Categories','MODULE_PAYMENT_MERCADOPAGO_CATEGORIES','Recomended to remove and install the module again if you need to change categories', '6','3','" . $categories . "',now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('Limit installments','MODULE_PAYMENT_MERCADOPAGO_INSTALMENTS','Limit the number of instalments','24','6','5','tep_cfg_select_option(array(\'24\',\'18\',\'15\',\'12\',\'10\',\'9\',\'6\',\'5\',\'4\',\'3\',\'2\',\'1\'), ', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Sandbox?', 'MODULE_PAYMENT_MERCADOPAGO_SANDBOX', 'true', 'Enable sandbox?', '6', '5', 'tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Kind of Checkout?', 'MODULE_PAYMENT_MERCADOPAGO_CHECKOUT', 'Transparent', 'Kind of Checkout?', '6', '5', 'tep_cfg_select_option(array(\'Transparent\', \'Lightbox\', \'Redirect\'), ', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Sucess Url','MODULE_PAYMENT_MERCADOPAGO_SUCESS_URL','Do not use LOCALHOST','" . HTTP_SERVER . DIR_WS_CATALOG . "account_history.php','6','4', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Pending url','MODULE_PAYMENT_MERCADOPAGO_PENDING_URL','Do not use LOCALHOST','" . HTTP_SERVER . DIR_WS_CATALOG . "account_history.php','6','5', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Cod Status pending','MODULE_PAYMENT_MERCADOPAGO_STATUS_PENDING','Automatic generate','" . $pending['orders_status_id'] . "','6','6', now())");
@@ -605,7 +663,10 @@ class mercadopago {
             'MODULE_PAYMENT_MERCADOPAGO_PENDING_URL',
             'MODULE_PAYMENT_MERCADOPAGO_COUNTRY',
             'MODULE_PAYMENT_MERCADOPAGO_METHODS',
-            'MODULE_PAYMENT_MERCADOPAGO_LIMIT',
+            'MODULE_PAYMENT_MERCADOPAGO_CATEGORIES',
+            'MODULE_PAYMENT_MERCADOPAGO_INSTALMENTS',
+            'MODULE_PAYMENT_MERCADOPAGO_SANDBOX',
+            'MODULE_PAYMENT_MERCADOPAGO_CHECKOUT',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_PENDING',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_APROVED',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_PROCESS',
