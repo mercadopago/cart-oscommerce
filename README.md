@@ -36,7 +36,7 @@
  
 	![Payment Method List](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png)
 
-8. Now, is very important to set your **CLIENT_ID** and **CLIENT_SECRET**, and choose the maximum number of installments that you want to accept in your store (the default is 18).
+8. Now, is very important to set your **CLIENT_ID** and **CLIENT_SECRET**, and choose the maximum number of installments that you want to accept in your store (the default is 24).
 	
 	Get your **CLIENT_ID** and **CLIENT_SECRET** in the following address:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
@@ -44,13 +44,20 @@
 	* Mexico: [https://www.mercadopago.com/mlm/herramientas/aplicaciones](https://www.mercadopago.com/mlm/herramientas/aplicaciones)
 	* Venezuela: [https://www.mercadopago.com/mlv/herramientas/aplicaciones](https://www.mercadopago.com/mlv/herramientas/aplicaciones)
 
+	Other options have been added and you can choose any time after installation:
+
+	- **Sandbox:** By default, sandbox have been selected. We belive, you need a environment to test your first payment.
+
+	- **Kind of Checkout:** Now you can choose what kind of checkout has adapted better with your front-end design, we recommend checkout transparent.
+
+
 9. **DO NOT TOUCH** the fields *Country*, *Exclude Methods*, *Cod Status (fields…)*. They were generated for you with the correct values, if you need to change them, is highly recommended that you reinstall the module.
 
 	![Do Not Touch](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/DoNotTouch.png)
 
 10. The fields **Sucess Url** and **Pending url** were also generated automatically, but if you're testing in a localhost, it will not work. You can change the address to any of your choice, but can't be localhost.
 
-10. Save your configuration and it's done!!
+11. Save your configuration and it's done!!
 
 ***IMPORTANT:***
 *This module will only work with the following currencies:*
