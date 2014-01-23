@@ -49,7 +49,8 @@ class Basic {
                     CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "GET"
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_SSLVERSION => 3
                 );
                 break;
             case 'put':
@@ -60,7 +61,8 @@ class Basic {
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
                     CURLOPT_CUSTOMREQUEST => "PUT",
-                    CURLOPT_HEADER => 1
+                    CURLOPT_HEADER => 1,
+                    CURLOPT_SSLVERSION => 3
                 );
                 break;
             case 'post':
@@ -71,6 +73,7 @@ class Basic {
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
                     CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_SSLVERSION => 3
                 );
                 break;
             case 'delete':
@@ -81,6 +84,7 @@ class Basic {
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
                     CURLOPT_CUSTOMREQUEST => "DELETE",
+                    CURLOPT_SSLVERSION => 3
                 );
 
                 break;
@@ -91,7 +95,8 @@ class Basic {
                     CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "GET"
+                    CURLOPT_CUSTOMREQUEST => "GET",
+                    CURLOPT_SSLVERSION => 3
                 );
                 break;
         endswitch;
