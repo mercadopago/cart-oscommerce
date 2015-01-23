@@ -46,45 +46,37 @@ class Basic {
                 $options = array(
                     CURLOPT_RETURNTRANSFER => '1',
                     CURLOPT_HTTPHEADER => $heads,
-                    CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    CURLOPT_SSLVERSION => 3
+                    CURLOPT_CUSTOMREQUEST => "GET"
                 );
                 break;
             case 'put':
                 $options = array(
                     CURLOPT_RETURNTRANSFER => 1,
                     CURLOPT_HTTPHEADER => $heads,
-                    CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
                     CURLOPT_CUSTOMREQUEST => "PUT",
-                    CURLOPT_HEADER => 1,
-                    CURLOPT_SSLVERSION => 3
+                    CURLOPT_HEADER => 1
                 );
                 break;
             case 'post':
                 $options = array(
                     CURLOPT_RETURNTRANSFER => '1',
                     CURLOPT_HTTPHEADER => $heads,
-                    CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_SSLVERSION => 3
+                    CURLOPT_CUSTOMREQUEST => "POST"
                 );
                 break;
             case 'delete':
                 $options = array(
                     CURLOPT_RETURNTRANSFER => '1',
                     CURLOPT_HTTPHEADER => $heads,
-                    CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "DELETE",
-                    CURLOPT_SSLVERSION => 3
+                    CURLOPT_CUSTOMREQUEST => "DELETE"
                 );
 
                 break;
@@ -92,11 +84,9 @@ class Basic {
                 $options = array(
                     CURLOPT_RETURNTRANSFER => '1',
                     CURLOPT_HTTPHEADER => $heads,
-                    CURLOPT_SSL_VERIFYPEER => 'false',
                     CURLOPT_URL => $url,
                     CURLOPT_POSTFIELDS => $posts,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    CURLOPT_SSLVERSION => 3
+                    CURLOPT_CUSTOMREQUEST => "GET"
                 );
                 break;
         endswitch;
