@@ -527,7 +527,7 @@ class mercadopago {
         );
         $country = MODULE_PAYMENT_MERCADOPAGO_COUNTRY;
         $exclude = MODULE_PAYMENT_MERCADOPAGO_METHODS;  // string
-        $limit = MODULE_PAYMENT_MERCADOPAGO_LIMIT;
+        $limit = MODULE_PAYMENT_MERCADOPAGO_INSTALMENTS;
         $pagamento = New MpShop(MODULE_PAYMENT_MERCADOPAGO_CLIENTID, MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET);
         tep_session_register('botton');
         $botton = $pagamento->GetCheckout($dados, $exclude, $limit);
