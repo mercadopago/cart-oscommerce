@@ -22,19 +22,19 @@
 
 4. Choose your country:
 
-	![Country Selecion](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/CountrySelection.png)
+	<img src="https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/CountrySelection.png" alt="Country Selecion" style="max-width:100%">
 
 5. Choose the payment methods that you don´t want to accept in your Store:
 
-	![Payment Methods Selection](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodsSelection.png)
+	<img src="https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodsSelection.png" alt="Payment Methods Selection" style="max-width:100%">
 
 6. [NEW] Choose the category on the list that more describe your shop activities.
 
-	![Category Selection](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/CategorySelection.png)
+	<img src="https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/CategorySelection.png" alt="Category Selection" style="max-width:100%">
 
 7. In the next screen, you will see **Mercadopago** listed as a payment method. Now, click on **Edit** on the right bar.
  
-	![Payment Method List](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png)
+	<img src="https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png" alt="Payment Method List" style="max-width:100%">
 
 8. Now, is very important to set your **CLIENT_ID** and **CLIENT_SECRET**, and choose the maximum number of installments that you want to accept in your store (the default is 24).
 	
@@ -53,7 +53,7 @@
 
 9. **DO NOT TOUCH** the fields *Country*, *Exclude Methods*, *Cod Status (fields…)*. They were generated for you with the correct values, if you need to change them, is highly recommended that you reinstall the module.
 
-	![Do Not Touch](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/DoNotTouch.png)
+	<img src="https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/DoNotTouch.png" alt="Do Not Touch" style="max-width:100%">
 
 10. The fields **Sucess Url** and **Pending url** were also generated automatically, but if you're testing in a localhost, it will not work. You can change the address to any of your choice, but can't be localhost.
 
