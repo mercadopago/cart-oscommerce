@@ -389,7 +389,7 @@ class mercadopago {
         $this->description = MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION;
         $this->sort_order = MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER;
 
-        $this->enabled = ((MODULE_PAYMENT_MERCADOPAGO_STATUS == 'Verdadeiro') ? true : false);
+        $this->enabled = ((MODULE_PAYMENT_MERCADOPAGO_STATUS == 'true') ? true : false);
 
 
         if ((int) MODULE_PAYMENT_MERCADOPAGO_ORDER_STATUS_ID > 0) {
@@ -456,24 +456,36 @@ class mercadopago {
         return false;
     }
 
-    /* function selection() {
-      return array('id' => $this->code,
-      'module' => $this->title);
-      } */
-
-//una version mejorada de 29/06
     function selection() {
-        $mercadopago_image = "http://imgmp.mlstatic.com/org-img/MLB/MP/BANNERS/tipo2_575X40.jpg";
         $fields = array();
-        $fields[] = array('title' => 'Modos de pagamento aceitos:',
+        $fields[] = array('title' => MP_CHECKOUT_METHOD_TEXT_DESCRIPTION . ':',
             'text' => '');
-        $fields[] = array('title' => '<img src="' . $mercadopago_image . '">',
+        $fields[] = array('title' => '<img src="' . $this->get_mercadopago_methods_image() . '" title="MercadoPago - Medios de pago" alt="MercadoPago - Medios de pago" width="575" height="40" >',
             'text' => '');
         return array('id' => $this->code,
             'module' => $this->title,
             'fields' => $fields);
     }
 
+    function get_mercadopago_methods_image() {
+        switch (MODULE_PAYMENT_MERCADOPAGO_COUNTRY):
+            case 'MLB':
+                $mercadopago_image = "http://imgmp.mlstatic.com/org-img/MLB/MP/BANNERS/tipo2_575X40.jpg";
+                break;
+            case 'MLA':
+                $mercadopago_image = "http://imgmp.mlstatic.com/org-img/banners/ar/medios/575X40.jpg";
+                break;
+            case 'MLM':
+                $mercadopago_image = "http://imgmp.mlstatic.com/org-img/banners/mx/medios/MLM_575X40.JPG";
+                break;
+             case 'MLV':
+                $mercadopago_image = "http://imgmp.mlstatic.com/org-img/banners/ve/medios/575X40.jpg";
+                break;
+        endswitch;
+         
+        return $mercadopago_image;
+    }
+    
     function pre_confirmation_check() {
         return false;
     }
@@ -568,9 +580,9 @@ class mercadopago {
         return $methods;
     }
 
-    public function GetCategories() {
+    public function GetCategories($country_id = null) {
         $mp = new MPShop();
-        $url = "https://api.mercadolibre.com/item_categories";
+        $url = "https://api.mercadolibre.com/sites/" . $country_id . "/categories";
         $header = array('Accept: application/json');
         $categories = $mp->DoPost(null, $url, $header, '200', 'none', 'get');
         return $categories;
@@ -624,10 +636,10 @@ class mercadopago {
 
         $country = $_POST['country'];
 
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable MercadoPago module', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'Verdadeiro', 'Deseja aceitar pagamentos por meio do MercadoPago?', '6', '3', 'tep_cfg_select_option(array(\'Verdadeiro\', \'Falso\'), ', now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your client id', '6','1',now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your client secret','6','2', now())");
-        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Ordem de exibi&ccedil;&atilde;o', 'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER', '1', 'O mais baixo &eacute; exibido primeiro.', '6', '0', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable MercadoPago module', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'true', 'Do you want to accept MercadoPago payments?', '6', '3', 'tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your Client ID', '6','1',now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your Client Secret','6','2', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Country','MODULE_PAYMENT_MERCADOPAGO_COUNTRY','Recomended to remove and install the module again if you need to change the country', '6','3','" . $country . "',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Exclude Methods','MODULE_PAYMENT_MERCADOPAGO_METHODS','Recomended to remove and install the module again if you need to change the no accepted methods', '6','3','" . $posts['methods'] . "',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Categories','MODULE_PAYMENT_MERCADOPAGO_CATEGORIES','Recomended to remove and install the module again if you need to change categories', '6','3','" . $categories . "',now())");

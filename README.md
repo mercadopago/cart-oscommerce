@@ -1,7 +1,6 @@
 # osCommerce - Mercadopago Module (v2.2 - 2.3)
 ---
 *Available for Argentina, Brazil, Mexico and Venezuela*
-*Prueba de modificación"
 
 ## Installation:
 
