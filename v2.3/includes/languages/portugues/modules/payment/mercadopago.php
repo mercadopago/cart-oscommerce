@@ -32,5 +32,6 @@ define('MP_ACTIVATION_METHODS_COUNTRY', 'Formas de pagamento não desejadas');
 define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que você <b>não</b> deseja aceitar');
 
 define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Modos de pagamento aceitos');
+define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue pagando com MercadoPago');
 
 ?>

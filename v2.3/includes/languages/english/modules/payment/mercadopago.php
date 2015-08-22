@@ -32,5 +32,6 @@ define('MP_ACTIVATION_METHODS_COUNTRY', 'Payment Methods not accepted');
 define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Check only the payment methods that you <b>DO NOT</b> want to accept');
 
 define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Accepted payment methods');
+define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue paying with MercadoPago');
 
 ?>
