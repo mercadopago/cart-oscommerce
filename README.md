@@ -2,7 +2,6 @@
 ---
 *Available for Argentina, Brazil, Mexico and Venezuela*
 
-
 ## Installation:
 
 1. Download Mercadopago module:

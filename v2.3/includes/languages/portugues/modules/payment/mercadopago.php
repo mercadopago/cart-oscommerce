@@ -9,25 +9,31 @@
 */
 
 define('MODULE_PAYMENT_MERCADOPAGO_TEXT_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Para obter os valores Client Id e Client Secret, acesse: <a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRA</b></a>|<a href=\"https://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARG</b></a>|<a href=\"https://www.mercadopago.com/mlm/herramientas/aplicaciones\" target=\"_blank\" ><b>MEX</b></a>|<a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VEN</b></a>');
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 
+        '<strong>MercadoPago</strong><br/>
+  	  Módulo MercadoPago para osCommerce. Para mais informações visite 
+          <a href="https://www.mercadopago.com.br/developers/pt/tools/modules/oscommerce/" style="text-decoration: underline;" target="_blank">MercadoPago Developers</a>.<br />
+  	  <br />
+          <strong>Requisitos</strong><br />
+          Para obter credenciais (Client Id e Client Secret), acesse:<br />
+          <ul>
+          <li><a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>Brasil</b></a></li>
+          <li><a href=\"https://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>Argentina</b></a></li>
+          <li><a href=\"https://www.mercadopago.com/mlm/herramientas/aplicaciones\" target=\"_blank\" ><b>México</b></a></li>
+          <li><a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>Venenzuela</b></a></li>
+          </ul>'
+        );
+
 define('MP_ACTIVATION_TITLE', 'Configurar MercadoPago');
-define('MP_ACTIVATION_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Seu meio de pagamento na Internet');
 define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Localização');
 define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Selecione seu país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
 define('MP_ACTIVATION_METHODS_COUNTRY', 'Formas de pagamento não desejadas');
-define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que você não deseja aceitar');
+define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagamento que você <b>não</b> deseja aceitar');
 
-/*
-  These constants will be used to show informations at:
-  Admin > Modules > Payment > MercadoPago
-
-  @author cadu (dot) rcorrea (at) gmail (dot) com
-*/
-
-define('MP_ADMIN_CREDENTIALS_SELECTION', 'Para obter as credenciais, acesse:');
-define('MP_ADMIN_ENABLE', 'Habilitar módulo MercadoPago');
+define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Modos de pagamento aceitos');
+define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue pagando com MercadoPago');
+define('MP_CHECKOUT_ERROR','Error to get preference key, please contact the store owner');
 
 
 ?>

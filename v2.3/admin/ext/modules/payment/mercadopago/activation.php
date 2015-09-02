@@ -12,7 +12,7 @@
 
 chdir('../../../../');
 require('includes/application_top.php');
-require('../includes/languages/' . $language . '/modules/payment/mercadopago.php');
+require('../' . DIR_WS_LANGUAGES . $language . '/modules/payment/mercadopago.php');
 require('../includes/modules/payment/mercadopago.php');
   
 $action = (isset($HTTP_GET_VARS['action']) ? $HTTP_GET_VARS['action'] : '');
@@ -95,13 +95,13 @@ $mp = new mercadopago;
       $methods = implode(",", $posts['methods']);
     }
 
-    $categories = $mp->GetCategories();
+    $categories = $mp->GetCategories($posts['country']);
 
     $html_categories  = '<select name="categories" style="width: 200px">';
 
     foreach ($categories as $category) {
 
-      $html_categories .=  '<option value="'. $category['id'] .'" id="'.$category["id"].'">'.$category["description"] .'</option>';
+      $html_categories .=  '<option value="'. $category['id'] .'" id="'.$category["id"].'">'.$category["name"] .'</option>';
       
     }
 

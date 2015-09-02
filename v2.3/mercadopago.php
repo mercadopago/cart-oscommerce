@@ -3,6 +3,9 @@
 require('includes/application_top.php');
 require(DIR_WS_INCLUDES . 'template_top.php');
 require('includes/modules/payment/mercadopago.php');
+require(DIR_WS_LANGUAGES . $language . '/modules/payment/mercadopago.php');
+
+$mp = new mercadopago();
 
   if ($_REQUEST['bt'] != '') { 
 
@@ -37,16 +40,13 @@ require('includes/modules/payment/mercadopago.php');
           <h1>Mercado Pago</h1>
 
           <div class="botao">
-          <?php if(MODULE_PAYMENT_MERCADOPAGO_COUNTRY == 'MLB'){ ?>
-          <div class="left" style="position:relative;float:left;"/><h3 style="margin: 10px;">Continue pagando com MercadoPago</h3></div>
-          <?php } else { ?>
-          <div class="left"/><h3 style="margin: 10px;">Continue pagando con MercadoPago</h3></div>
-          <?php } ?>
-          <div class="right" style="position:relative;float:right;" />
-          <a href="<?php echo $_REQUEST['bt']; ?>" id="btnPagar" name="MP-Checkout" class="blue-l-rn-ar" mp-mode="<?php echo $mode; ?>">Comprar</a>
+            <div class="left">
+              <h3 style="margin: 10px;"><?= MP_CHECKOUT_TEXT_DESCRIPTION ?></h3>
+              <img src="<?= $mp->get_mercadopago_methods_image() ?>" alt="MercadoPago" title="MercadoPago" style="margin: 10px;"/>
+              <a href="<?php echo $_REQUEST['bt']; ?>" id="btnPagar" name="MP-Checkout" class="blue-l-rn-ar" mp-mode="<?php echo $mode; ?>">Comprar</a>
+            </div>
           </div>
-          </div>
-          <img src="http://imgmp.mlstatic.com/org-img/MLB/MP/BANNERS/tipo2_468X60.jpg" alt="MercadoPago" title="MercadoPago" />
+          <!-- http://imgmp.mlstatic.com/org-img/MLB/MP/BANNERS/tipo2_468X60.jpg -->
 
           <script type="text/javascript">
               (function(){function $MPBR_load(){window.$MPBR_loaded !== true && (function(){var s = document.createElement("script");s.type = "text/javascript";s.async = true;
@@ -78,7 +78,7 @@ require('includes/modules/payment/mercadopago.php');
 
   } else {
    
-   echo 'Error to get preference key, please contact the store owner'; 
+   echo MP_CHECKOUT_ERROR; 
   
   }
  
@@ -88,8 +88,7 @@ require('includes/modules/payment/mercadopago.php');
 
   if(!isset($_REQUEST['bt']) && isset($_REQUEST['id']) && isset($_REQUEST['topic']) && $_REQUEST['topic'] = 'payment'){
 
-    $mb = new mercadopago();
-    $status = $mb->retorno($_REQUEST['id']);
+    $status = $mp->retorno($_REQUEST['id']);
 
   }
 
