@@ -33,5 +33,7 @@ define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque apenas as formas de pagame
 
 define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Modos de pagamento aceitos');
 define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue pagando com MercadoPago');
+define('MP_CHECKOUT_ERROR','Error to get preference key, please contact the store owner');
+
 
 ?>

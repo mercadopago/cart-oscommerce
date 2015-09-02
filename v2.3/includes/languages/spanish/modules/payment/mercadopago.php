@@ -33,5 +33,6 @@ define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Seleccione solo las formas de pag
 
 define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Medios de pago aceptados');
 define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue pagando con MercadoPago');
+define('MP_CHECKOUT_ERROR','No se pueden obtener los datos de MercadoPago, por favor contáctese con los administradores del sitio.');
 
 ?>

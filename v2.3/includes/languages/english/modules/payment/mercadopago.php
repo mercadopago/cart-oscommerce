@@ -33,5 +33,6 @@ define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Check only the payment methods th
 
 define('MP_CHECKOUT_METHOD_TEXT_DESCRIPTION','Accepted payment methods');
 define('MP_CHECKOUT_TEXT_DESCRIPTION','Continue paying with MercadoPago');
+define('MP_CHECKOUT_ERROR','Error to get preference key, please contact the store owner');
 
 ?>

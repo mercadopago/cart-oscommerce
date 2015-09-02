@@ -78,7 +78,7 @@ $mp = new mercadopago();
 
   } else {
    
-   echo 'Error to get preference key, please contact the store owner'; 
+   echo MP_CHECKOUT_ERROR; 
   
   }
  
