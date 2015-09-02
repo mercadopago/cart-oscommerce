@@ -505,14 +505,16 @@ class mercadopago {
     function after_process() {
         global $insert_id, $order;
         
+        $country = MODULE_PAYMENT_MERCADOPAGO_COUNTRY;
+        $conversion_data = $this->currency_conversion($order,$country);
         $dados = array(
             'external_reference' => $insert_id, // seu codigo de referencia, i.e. Numero do pedido da sua loja 
-            'currency' => $order->info['currency'], // string Argentina: ARS (peso argentino) � USD (D�lar estadounidense); Brasil: BRL (Real).
             'title' => $order->products[0]['name'], //string
             'description' => $order->products[0]['name'], // string
             'quantity' => $order->products[0]['qty'], // int
+            'currency' => $conversion_data['currency'],
+            'amount' => $conversion_data['amount'], //decimal
             'image' => 'https://www.mercadopago.com/org-img/MP3/home/logomp3.gif', // Imagem, string
-            'amount' => $order->info['total'], //decimal
             'category' => MODULE_PAYMENT_MERCADOPAGO_CATEGORIES,
             'payment_firstname' => $order->customer['firstname'], // string
             'payment_lastname' => $order->customer['lastname'], // string
@@ -526,7 +528,6 @@ class mercadopago {
             'pending' => MODULE_PAYMENT_MERCADOPAGO_PENDING_URL, // string
             'approved' => MODULE_PAYMENT_MERCADOPAGO_SUCESS_URL, // string 
         );
-        $country = MODULE_PAYMENT_MERCADOPAGO_COUNTRY;
         $exclude = MODULE_PAYMENT_MERCADOPAGO_METHODS;  // string
         $limit = MODULE_PAYMENT_MERCADOPAGO_INSTALMENTS;
         $pagamento = New MpShop(MODULE_PAYMENT_MERCADOPAGO_CLIENTID, MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET);
@@ -588,6 +589,39 @@ class mercadopago {
         return $categories;
     }
 
+    function currency_conversion($order = null, $country_id = null) {
+        switch (MODULE_PAYMENT_MERCADOPAGO_CONVERSION_MANAGER):
+            case "osCommerce":
+                global $currencies;
+                $default_currency_id = $this->get_default_currency($country_id);
+                
+                $result = array (
+                    "currency" => $default_currency_id,
+                    "amount" => $order->info['total'] * $currencies->currencies[$default_currency_id]['value'],
+                );
+                break;
+            case "MercadoPago":
+                $result = array (
+                    "currency" => $order->info['currency'],
+                    "amount" => $order->info['total'] * $order->info['currency_value'],
+                );
+                break;
+        endswitch;
+        
+        return $result;
+    }
+    
+    /**
+     * Gets the default currency id for the asigned country
+     */
+    function get_default_currency($country_id = null) {
+        $mp = new MPShop();
+        $url = "https://api.mercadolibre.com/sites/" . $country_id;
+        $header = array('Accept: application/json');
+        $mp_site = $mp->DoPost(null, $url, $header, '200', 'none', 'get');
+        return $mp_site["default_currency_id"];
+    }
+    
     function install() {
 
         $active = (isset($HTTP_GET_VARS['actitve']) ? $HTTP_GET_VARS['actitve'] : '');
@@ -639,6 +673,7 @@ class mercadopago {
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable MercadoPago module', 'MODULE_PAYMENT_MERCADOPAGO_STATUS', 'true', 'Do you want to accept MercadoPago payments?', '6', '3', 'tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_id','MODULE_PAYMENT_MERCADOPAGO_CLIENTID','Insert your Client ID', '6','1',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, date_added) values ('Client_secret','MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET','Insert your Client Secret','6','2', now())");
+        tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Currency conversion manager', 'MODULE_PAYMENT_MERCADOPAGO_CONVERSION_MANAGER', 'osCommerce', 'Who handle the currency conversion', '6', '3', 'tep_cfg_select_option(array(\'osCommerce\', \'MercadoPago\'), ', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort order of display.', 'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER', '1', 'Sort order of display. Lowest is displayed first.', '6', '0', now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Country','MODULE_PAYMENT_MERCADOPAGO_COUNTRY','Recomended to remove and install the module again if you need to change the country', '6','3','" . $country . "',now())");
         tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_group_id, sort_order, configuration_value, date_added) values ('Exclude Methods','MODULE_PAYMENT_MERCADOPAGO_METHODS','Recomended to remove and install the module again if you need to change the no accepted methods', '6','3','" . $posts['methods'] . "',now())");
@@ -665,6 +700,7 @@ class mercadopago {
         return array('MODULE_PAYMENT_MERCADOPAGO_STATUS',
             'MODULE_PAYMENT_MERCADOPAGO_CLIENTID',
             'MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET',
+            'MODULE_PAYMENT_MERCADOPAGO_CONVERSION_MANAGER',
             'MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER',
             'MODULE_PAYMENT_MERCADOPAGO_SUCESS_URL',
             'MODULE_PAYMENT_MERCADOPAGO_PENDING_URL',
