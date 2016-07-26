@@ -39,7 +39,15 @@ $mp = new mercadopago;
   <?php  
     if ($action == '') { 
 
-    $countries = $mp->getCountries(); ?>      
+    $sites = array(
+        'MLA' =>'Argentina',
+        'MLB' =>'Brazil',
+        'MLC' =>'Chile',
+        'MCO' =>'Colombia',
+        'MLM' =>'Mexico',
+        'MPE' =>'Peru',
+        'MLV' =>'Venezuela'
+    ); ?>
 
     <p><strong><u><?php echo MP_ACTIVATION_ACTIVATE_COUNTRY; ?></u></strong></p>
     <p><?php echo MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT; ?></p>
@@ -50,11 +58,11 @@ $mp = new mercadopago;
 
       $showcountries  = '<select name="country" id="country">';
 
-      foreach ($countries as $country) {
-        if ($country['id'] == MODULE_PAYMENT_MERCADOPAGO_COUNTRY) { 
-          $showcountries  .= '<option value="'. $country["id"].'" selected="selected" id="'. $country["id"] .'">'.$country["name"].'</option>';
+      foreach ($sites as $site_id => $site_name) {
+        if ($site_id == MODULE_PAYMENT_MERCADOPAGO_COUNTRY) { 
+          $showcountries  .= '<option value="'. $site_id .'" selected="selected" id="'. $site_id .'">'.$site_name.'</option>';
         } else { 
-          $showcountries  .=  '<option value="'. $country['id'] .'" id="'.$country["id"].'">'.$country["name"] .'</option>';
+          $showcountries  .=  '<option value="'. $site_id .'" id="'.$site_id.'">'.$site_name .'</option>';
         } 
       }
       $showcountries  .=  '</select>';

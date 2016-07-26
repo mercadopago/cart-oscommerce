@@ -8,14 +8,35 @@
   Released under the GNU General Public License
 */
 
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Para obtener los valores de Client Id y el Client Secret, siga: <a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRA</b></a>|<a href=\"https://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARG</b></a>|<a href=\"https://www.mercadopago.com/mlm/herramientas/aplicaciones\" target=\"_blank\" ><b>MEX</b></a>|<a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VEN</b></a>');
-define('MP_ACTIVATION_TITLE', 'Configurar MercadoPago');
-define('MP_ACTIVATION_TITLE', 'MercadoPago');
-define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', '');
-define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'País');
-define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Seleccione su país');
+ /*
+  These constants will be used to show informations at:
+  Admin > Modules > Payment > Mercado Pago
+
+  @author cadu (dot) rcorrea (at) gmail (dot) com
+*/
+
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_TITLE', 'Mercado Pago');
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', MP_ADMIN_CREDENTIALS_SELECTION . '
+	<ul>
+	<li><a href=\"https://www.mercadopago.com/mla/herramientas/aplicaciones\" target=\"_blank\"><b>ARGENTINA</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mlb/ferramentas/aplicacoes\" target=\"_blank\" ><b>BRASIL</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mlc/herramientas/aplicaciones\" target=\"_blank\" ><b>CHILE</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mco/herramientas/aplicaciones\" target=\"_blank\" ><b>COLOMBIA</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mlm/herramientas/aplicaciones\" target=\"_blank\" ><b>MÉXICO</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mpe/herramientas/aplicaciones\" target=\"_blank\" ><b>PERÚ</b></a></li>
+	<li><a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VENEZUELA</b></a></li>
+	</ul>
+');
+define('MP_ACTIVATION_TITLE', 'Configurar Mercado Pago');
+define('MP_ACTIVATION_TITLE', 'Mercado Pago');
+define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', 'Su medio de pago en Internet');
+define('MP_ACTIVATION_ACTIVATE_COUNTRY', 'Localización');
+define('MB_ACTIVATION_ACTIVATE_COUNTRY_TEXT', 'Selecione su país');
 define('MB_ACTIVATION_CONTINUE_BUTTON', 'Continuar');
-define('MP_ACTIVATION_METHODS_COUNTRY', 'Medios de pago no deseados');
-define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Formas de pago que NO quiere aceptar');
+define('MP_ACTIVATION_METHODS_COUNTRY', 'Medios de pago no aceptados');
+define('MB_ACTIVATION_ACTIVATE_METHODS_TEXT', 'Marque sólo las formas de pago que <b>NO</b> desea aceptar');
+
+define('MP_ADMIN_CREDENTIALS_SELECTION', 'Para obtener sus credenciales, acceda a:');
+define('MP_ADMIN_ENABLE', 'Habilitar módulo Mercado Pago');
+
 ?>
