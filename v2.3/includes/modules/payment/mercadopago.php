@@ -572,7 +572,7 @@ class mercadopago {
           if(!in_array("test_user", $user['response']['tags'])){
             $sponsor_id = "";
 
-            switch ($site_id) {
+            switch ($user_info['site_id']) {
               case 'MLA':
               $sponsor_id = 222656987;
               break;
