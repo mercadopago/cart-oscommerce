@@ -4,7 +4,18 @@ require('includes/application_top.php');
 require(DIR_WS_INCLUDES . 'template_top.php');
 require('includes/modules/payment/mercadopago.php');
 
-  if ($_REQUEST['bt'] != '') { 
+
+if(!isset($_REQUEST['bt']) && isset($_REQUEST['id']) && isset($_REQUEST['topic']) && $_REQUEST['topic'] = 'merchant_order'){
+
+  $mb = new mercadopago();
+  $status = $mb->processIPNMerchantOrder();
+
+  echo "IPN PROCESS";
+  exit;
+}
+
+
+  if ($_REQUEST['bt'] != '') {
 
     switch (MODULE_PAYMENT_MERCADOPAGO_CHECKOUT) {
       case 'Transparent':
@@ -18,7 +29,7 @@ require('includes/modules/payment/mercadopago.php');
             s.src = ("https:"==document.location.protocol?"https://www.mercadopago.com/org-img/jsapi/mptools/buttons/":"http://mp-tools.mlstatic.com/buttons/")+"render.js";
             var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);window.$MPBR_loaded = true;})();}
             window.$MPBR_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPBR_load) : window.addEventListener('load', $MPBR_load, false)) : null;})();
-        </script>        
+        </script>
 
         <?php
 
@@ -69,7 +80,7 @@ require('includes/modules/payment/mercadopago.php');
             }
             fireEvent(document.getElementById("btnPagar_"), 'click')
           </script>
-  
+
           <?php
           $cart->reset(true);
 
@@ -77,20 +88,13 @@ require('includes/modules/payment/mercadopago.php');
     }
 
   } else {
-   
-   echo 'Error to get preference key, please contact the store owner'; 
-  
+
+   echo 'Error to get preference key, please contact the store owner';
+
   }
- 
+
   require(DIR_WS_INCLUDES . 'template_bottom.php');
-  require(DIR_WS_INCLUDES . 'application_bottom.php'); 
+  require(DIR_WS_INCLUDES . 'application_bottom.php');
 
-
-  if(!isset($_REQUEST['bt']) && isset($_REQUEST['id']) && isset($_REQUEST['topic']) && $_REQUEST['topic'] = 'payment'){
-
-    $mb = new mercadopago();
-    $status = $mb->retorno($_REQUEST['id']);
-
-  }
 
 ?>
