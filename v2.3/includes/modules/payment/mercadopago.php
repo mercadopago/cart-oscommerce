@@ -465,27 +465,27 @@ class mercadopago {
       // if not, create Mercado Pago status
       if (tep_db_num_rows($check_query) < 1) {
         $status_id = $this->addStatus('MERCADO PAGO [Pending]');
-        $status_id = $this->addStatus('MERCADO PAGO [InProcess]');
+        $status_id = $this->addStatus('MERCADO PAGO [In Process]');
         $status_id = $this->addStatus('MERCADO PAGO [Rejected]');
         $status_id = $this->addStatus('MERCADO PAGO [Approved]');
         $status_id = $this->addStatus('MERCADO PAGO [Refunded]');
         $status_id = $this->addStatus('MERCADO PAGO [Canceled]');
-        $status_id = $this->addStatus('MERCADO PAGO [InMediation]');
+        $status_id = $this->addStatus('MERCADO PAGO [In Mediation]');
       }
 
 
       // get the id of the status
       $stpending = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Pending]' limit 1");
       $pending = tep_db_fetch_array($stpending);
-      $stprocess = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [InProcess]' limit 1");
+      $stprocess = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [In Process]' limit 1");
       $process = tep_db_fetch_array($stprocess);
-      $streject = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Reject]' limit 1");
+      $streject = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Rejected]' limit 1");
       $reject = tep_db_fetch_array($streject);
-      $staproved = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Aproved]' limit 1");
+      $staproved = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Approved]' limit 1");
       $aproved = tep_db_fetch_array($staproved);
-      $strefunded = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [refunded]' limit 1");
+      $strefunded = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Refunded]' limit 1");
       $refunded = tep_db_fetch_array($strefunded);
-      $stinmediation = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [InMediation]' limit 1");
+      $stinmediation = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [In Mediation]' limit 1");
       $mediation = tep_db_fetch_array($stinmediation);
       $stcancel = tep_db_query("select orders_status_id from " . TABLE_ORDERS_STATUS . " where orders_status_name = 'MERCADO PAGO [Canceled]' limit 1");
       $cancel = tep_db_fetch_array($stcancel);
