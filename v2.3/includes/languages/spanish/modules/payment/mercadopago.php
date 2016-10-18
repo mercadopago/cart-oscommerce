@@ -26,6 +26,9 @@ define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', MP_ADMIN_CREDENTIALS_SELEC
 	<li><a href=\"https://www.mercadopago.com/mpe/herramientas/aplicaciones\" target=\"_blank\" ><b>PERÚ</b></a></li>
 	<li><a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VENEZUELA</b></a></li>
 	</ul>
+  </br>
+  </br>
+  <b>Version del modulo:</b> 2.0.1
 ');
 define('MP_ACTIVATION_TITLE', 'Configurar Mercado Pago');
 define('MP_ACTIVATION_TITLE', 'Mercado Pago');

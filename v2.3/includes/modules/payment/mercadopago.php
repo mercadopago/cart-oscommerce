@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: mercadopago.php,v 2.0.0 2016/07/26 11:30:00 hpdl Exp $
+  $Id: mercadopago.php,v 2.0.1 2016/07/26 11:30:00 hpdl Exp $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -30,6 +30,11 @@ class mercadopago {
       if ((int) MODULE_PAYMENT_MERCADOPAGO_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_MERCADOPAGO_ORDER_STATUS_ID;
       }
+    }
+
+    //is admin!?
+    if((isset($_REQUEST['set']) && isset($_REQUEST['module'])) && $_REQUEST['set'] == "payment" && $_REQUEST['module'] == "mercadopago"){
+      $this->updateApiAccountSettings();
     }
 
     if (is_object($order)){
@@ -505,6 +510,11 @@ class mercadopago {
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Sucess Url','MODULE_PAYMENT_MERCADOPAGO_SUCESS_URL','Do not use LOCALHOST','" . HTTP_SERVER . DIR_WS_CATALOG . "account_history.php','6','4', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Pending url','MODULE_PAYMENT_MERCADOPAGO_PENDING_URL','Do not use LOCALHOST','" . HTTP_SERVER . DIR_WS_CATALOG . "account_history.php','6','5', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Enable Auto Return?', 'MODULE_PAYMENT_MERCADOPAGO_AUTORETURN', 'true', 'Enable automatic redirection to Success URL after approval', '6', '5', 'tep_cfg_select_option(array(\'true\', \'false\'), ', now())");
+
+      //two cards
+      tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Two Card in Basic Checkout', 'MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT', 'active', 'Enables the buyer to pay with two cards', '6', '5', 'tep_cfg_select_option(array(\'active\', \'inactive\'), ', now())");
+
+      // ipn status
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Cod Status pending','MODULE_PAYMENT_MERCADOPAGO_STATUS_PENDING','Automatically generated','" . $pending['orders_status_id'] . "','6','6', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Cod Status approved','MODULE_PAYMENT_MERCADOPAGO_STATUS_APROVED','Automatically generated','" . $aproved['orders_status_id'] . "','6','7', now())");
       tep_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_description, configuration_value, configuration_group_id, sort_order, date_added) values ('Cod Status in process','MODULE_PAYMENT_MERCADOPAGO_STATUS_PROCESS','Automatically generated','" . $process['orders_status_id'] . "','6','8', now())");
@@ -532,6 +542,7 @@ class mercadopago {
             'MODULE_PAYMENT_MERCADOPAGO_INSTALLMENTS',
             'MODULE_PAYMENT_MERCADOPAGO_SANDBOX',
             'MODULE_PAYMENT_MERCADOPAGO_CHECKOUT',
+            'MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_PENDING',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_APROVED',
             'MODULE_PAYMENT_MERCADOPAGO_STATUS_PROCESS',
@@ -630,6 +641,31 @@ class mercadopago {
         $payment_return['status'] = "approved";
       }
       return $payment_return;
+    }
+
+    function updateApiAccountSettings(){
+      if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
+				//init mercado pago
+				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENTID, MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET);
+
+        //get info user
+				$request = array(
+					"uri" => "/account/settings",
+					"params" => array(
+						"access_token" => $mercadopago->get_access_token()
+					),
+					"data" => array(
+						"two_cards" => MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT
+					),
+					"headers" => array(
+							"content-type" => "application/json"
+					)
+				);
+				$account_settings = MPRestClient::put($request);
+        if($account_settings['status'] == 200){
+          return true;
+        }
+			}
     }
 
 }
