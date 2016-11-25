@@ -28,7 +28,7 @@ define('MODULE_PAYMENT_MERCADOPAGO_TEXT_DESCRIPTION', MP_ADMIN_CREDENTIALS_SELEC
 	</ul>
   </br>
   </br>
-  <b>Version del modulo:</b> 2.0.1
+  <b>Version del modulo:</b> 2.0.2
 ');
 define('MP_ACTIVATION_TITLE', 'Configurar Mercado Pago');
 define('MP_ACTIVATION_TITLE', 'Mercado Pago');

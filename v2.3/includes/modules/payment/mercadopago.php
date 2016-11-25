@@ -35,6 +35,7 @@ class mercadopago {
     //is admin!?
     if((isset($_REQUEST['set']) && isset($_REQUEST['module'])) && $_REQUEST['set'] == "payment" && $_REQUEST['module'] == "mercadopago"){
       $this->updateApiAccountSettings();
+      $this->updateApiAnalytics();
     }
 
     if (is_object($order)){
@@ -642,6 +643,36 @@ class mercadopago {
       }
       return $payment_return;
     }
+
+    function updateApiAnalytics(){
+
+      if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
+        $status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
+        $status_two_cards = MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT == "active" ? "true": "false";
+
+				//init mercado pago
+				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENTID, MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET);
+				//get info user
+        $request = array(
+					"uri" => "/modules/tracking/settings",
+					"params" => array(
+						"access_token" => $mercadopago->get_access_token()
+					),
+					"data" => array(
+						"two_cards" => strtolower($status_two_cards),
+						"checkout_basic" => $status_module,
+						"platform" => "OsCommerce",
+						"platform_version" => "2.0.2"
+					),
+					"headers" => array(
+							"content-type" => "application/json"
+					)
+				);
+
+				$analytics = MPRestClient::post($request);
+
+			}
+		}
 
     function updateApiAccountSettings(){
       if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
