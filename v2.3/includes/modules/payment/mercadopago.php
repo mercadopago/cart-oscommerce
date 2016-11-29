@@ -663,7 +663,8 @@ class mercadopago {
 						"checkout_basic" => $status_module,
 						"platform" => "OsCommerce",
 						"platform_version" => PROJECT_VERSION,
-            "module_version" => "2.0.2"
+            "module_version" => "2.0.2",
+						"php_version" => phpversion()
 					),
 					"headers" => array(
 							"content-type" => "application/json"
