@@ -662,7 +662,8 @@ class mercadopago {
 						"two_cards" => strtolower($status_two_cards),
 						"checkout_basic" => $status_module,
 						"platform" => "OsCommerce",
-						"platform_version" => "2.0.2"
+						"platform_version" => PROJECT_VERSION,
+            "module_version" => "2.0.2"
 					),
 					"headers" => array(
 							"content-type" => "application/json"
