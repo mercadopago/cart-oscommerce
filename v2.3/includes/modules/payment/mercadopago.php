@@ -664,7 +664,7 @@ class mercadopago {
 						"platform" => "OsCommerce",
 						"platform_version" => PROJECT_VERSION,
             "module_version" => "2.0.2",
-						"php_version" => phpversion()
+						"code_version" => phpversion()
 					),
 					"headers" => array(
 							"content-type" => "application/json"
