@@ -11,6 +11,7 @@
  */
 
 require_once "mercadopago/sdk/mercadopago.php";
+define("MP_MODULE_VERSION", "2.0.2");
 
 class mercadopago {
 
@@ -267,7 +268,7 @@ class mercadopago {
       }
 
       $fields[] = array(
-        'title' => '<img src="' . $mercadopago_image . '">',
+        'title' => '<img src="' . $mercadopago_image . '">' . $this->_checkoutOpen(),
         'text' => ''
       );
       return array(
@@ -645,7 +646,6 @@ class mercadopago {
     }
 
     function updateApiAnalytics(){
-
       if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
         $status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
         $status_two_cards = MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT == "active" ? "true": "false";
@@ -663,7 +663,7 @@ class mercadopago {
 						"checkout_basic" => $status_module,
 						"platform" => "OsCommerce",
 						"platform_version" => PROJECT_VERSION,
-            "module_version" => "2.0.2",
+            "module_version" => MP_MODULE_VERSION,
 						"code_version" => phpversion()
 					),
 					"headers" => array(
@@ -699,6 +699,25 @@ class mercadopago {
           return true;
         }
 			}
+    }
+
+    function _checkoutOpen(){
+      $html = '<script src="https://secure.mlstatic.com/modules/javascript/analytics.js"></script>';
+
+      if(MODULE_PAYMENT_MERCADOPAGO_CLIENTID != ""){
+        $html .= "
+        <script>
+        var MA = ModuleAnalytics;
+        MA.setToken('" . MODULE_PAYMENT_MERCADOPAGO_CLIENTID . "');
+        MA.setPlatform('OsCommerce');
+        MA.setPlatformVersion('" . PROJECT_VERSION . "');
+        MA.setModuleVersion('" . MP_MODULE_VERSION . "');
+        MA.post();
+        </script>
+        ";
+      }
+
+      return $html;
     }
 
 }
