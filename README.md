@@ -6,7 +6,7 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Setup](#setup)
-* [Feedback](#feedback)
+* [Social](#social)
 
 
 <a name="features"></a>
@@ -79,11 +79,11 @@ v2.3 | Stable (Current version) | osCommerce 2.3
 	![Category Selection](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/CategorySelection.png)
 
 7. In the next screen, you will see **MercadoPago** listed as a payment method. Now, click on **Edit** on the right bar.
- 
+
 	![Payment Method List](https://raw.github.com/mercadopago/cart-oscommerce/master/README.img/PaymentMethodList.png)
 
 8. Now, is very important to set your **CLIENT_ID** and **CLIENT_SECRET**.
-	
+
 	Get your CLIENT_ID and CLIENT_SECRET in the following address:
 	* Argentina: [https://www.mercadopago.com/mla/herramientas/aplicaciones](https://www.mercadopago.com/mla/herramientas/aplicaciones)
 	* Brazil: [https://www.mercadopago.com/mlb/ferramentas/aplicacoes](https://www.mercadopago.com/mlb/ferramentas/aplicacoes)
@@ -127,10 +127,11 @@ v2.3 | Stable (Current version) | osCommerce 2.3
 	* **VEF** (Venezuelan Bolivar)
 
 
-<a name="Feedback"></a>
-##Feedback##
+<a name="social"></a>
+##Social##
 
-We want to know your opinion, please answer the following form.
-
-* [Portuguese](http://goo.gl/forms/2n5jWHaQbfEtdy0E2)
-* [Spanish](http://goo.gl/forms/A9bm8WuqTIZ89MI22)
+Follow our facebook group and watch our videos
+<ul>
+  <li><a href="https://www.facebook.com/groups/modulos.mercadopago/?ref=ts&fref=ts" target="_blank">FACEBOOK</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLl8LGzRu2_sXxChIJm1e0xY6dU3Dj_tNi" target="_blank">YOUTUBE</a></li>
+</ul>
