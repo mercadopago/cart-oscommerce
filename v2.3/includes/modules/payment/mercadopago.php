@@ -11,6 +11,7 @@
  */
 
 require_once "mercadopago/sdk/mercadopago.php";
+define("MP_MODULE_VERSION", "2.0.2");
 
 class mercadopago {
 
@@ -35,6 +36,7 @@ class mercadopago {
     //is admin!?
     if((isset($_REQUEST['set']) && isset($_REQUEST['module'])) && $_REQUEST['set'] == "payment" && $_REQUEST['module'] == "mercadopago"){
       $this->updateApiAccountSettings();
+      $this->updateApiAnalytics();
     }
 
     if (is_object($order)){
@@ -266,7 +268,7 @@ class mercadopago {
       }
 
       $fields[] = array(
-        'title' => '<img src="' . $mercadopago_image . '">',
+        'title' => '<img src="' . $mercadopago_image . '">' . $this->_checkoutOpen(),
         'text' => ''
       );
       return array(
@@ -643,6 +645,37 @@ class mercadopago {
       return $payment_return;
     }
 
+    function updateApiAnalytics(){
+      if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
+        $status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
+        $status_two_cards = MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT == "active" ? "true": "false";
+
+				//init mercado pago
+				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENTID, MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET);
+				//get info user
+        $request = array(
+					"uri" => "/modules/tracking/settings",
+					"params" => array(
+						"access_token" => $mercadopago->get_access_token()
+					),
+					"data" => array(
+						"two_cards" => strtolower($status_two_cards),
+						"checkout_basic" => $status_module,
+						"platform" => "OsCommerce",
+						"platform_version" => PROJECT_VERSION,
+            "module_version" => MP_MODULE_VERSION,
+						"code_version" => phpversion()
+					),
+					"headers" => array(
+							"content-type" => "application/json"
+					)
+				);
+
+				$analytics = MPRestClient::post($request);
+
+			}
+		}
+
     function updateApiAccountSettings(){
       if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENTID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENTSECRET != "")){
 				//init mercado pago
@@ -666,6 +699,25 @@ class mercadopago {
           return true;
         }
 			}
+    }
+
+    function _checkoutOpen(){
+      $html = '<script src="https://secure.mlstatic.com/modules/javascript/analytics.js"></script>';
+
+      if(MODULE_PAYMENT_MERCADOPAGO_CLIENTID != ""){
+        $html .= "
+        <script>
+        var MA = ModuleAnalytics;
+        MA.setToken('" . MODULE_PAYMENT_MERCADOPAGO_CLIENTID . "');
+        MA.setPlatform('OsCommerce');
+        MA.setPlatformVersion('" . PROJECT_VERSION . "');
+        MA.setModuleVersion('" . MP_MODULE_VERSION . "');
+        MA.post();
+        </script>
+        ";
+      }
+
+      return $html;
     }
 
 }

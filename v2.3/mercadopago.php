@@ -92,9 +92,18 @@ if(!isset($_REQUEST['bt']) && isset($_REQUEST['id']) && isset($_REQUEST['topic']
    echo 'Error to get preference key, please contact the store owner';
 
   }
+?>
 
+<script src="https://secure.mlstatic.com/modules/javascript/analytics.js"></script>
+<script>
+  var MA = ModuleAnalytics;
+  MA.setToken('<?php echo MODULE_PAYMENT_MERCADOPAGO_CLIENTID; ?>');
+  MA.setPaymentType('basic');
+  MA.setCheckoutType('basic');
+  MA.put();
+</script>
+
+<?php
   require(DIR_WS_INCLUDES . 'template_bottom.php');
   require(DIR_WS_INCLUDES . 'application_bottom.php');
-
-
 ?>
