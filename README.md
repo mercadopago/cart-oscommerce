@@ -1,4 +1,4 @@
-# osCommerce - Mercado Pago Module (v2.2 - 2.3)
+# osCommerce - Mercado Pago Module (v2.3)
 ---
 
 * [Features](#features)
@@ -30,7 +30,7 @@ Great for merchants who want to get going quickly and easily.
 
 Plugin Version | Status | Compatible Versions
 -------------- | ------ | -------------------
-v2.2 | Deprecated (Old version) | osCommerce 2.2
+v2.2 | Deprecated (Old version) Refer to branch v2.2 | osCommerce 2.2
 v2.3 | Stable (Current version) | osCommerce 2.3
 
 
@@ -51,7 +51,7 @@ v2.3 | Stable (Current version) | osCommerce 2.3
 ## Installation:
 
 1. Download Mercado Pago module:
-    * osCommerce 2.2
+    * osCommerce 2.2 (Branch v2.2)
     * osCommerce 2.3
 
 2. Copy the module folder to your osCommerce ROOT installation.
@@ -125,13 +125,3 @@ v2.3 | Stable (Current version) | osCommerce 2.3
 	* **PEN** (Peruvian Sol)
 * Venezuela:
 	* **VEF** (Venezuelan Bolivar)
-
-
-<a name="social"></a>
-##Social##
-
-Follow our facebook group and watch our videos
-<ul>
-  <li><a href="https://www.facebook.com/groups/modulos.mercadopago/?ref=ts&fref=ts" target="_blank">FACEBOOK</a></li>
-  <li><a href="https://www.youtube.com/playlist?list=PLl8LGzRu2_sXxChIJm1e0xY6dU3Dj_tNi" target="_blank">YOUTUBE</a></li>
-</ul>
