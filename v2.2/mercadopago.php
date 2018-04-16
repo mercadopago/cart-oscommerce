@@ -12,13 +12,13 @@ require('includes/application_top.php');
 require('includes/modules/payment/mercadopago.php');
 ?>
 <?php if ($_REQUEST['bt'] != ''){ ?>
-    
-    
-    
 
 
 
- 
+
+
+
+
 
 
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -44,9 +44,9 @@ require('includes/modules/payment/mercadopago.php');
     </table></td>
 <!-- body_text //-->
     <td width="100%" valign="middle">
-        
-        
-        
+
+
+
 <div class="botao">
 <?php if(MODULE_PAYMENT_MERCADOPAGO_COUNTRY == 'MLB'){ ?>
 <div class="left" style="position:relative;float:left;"/><h3 style="margin: 10px;">Continue pagando com MercadoPago</h3></div>
@@ -88,9 +88,9 @@ fireEvent(document.getElementById("btnPagar"), 'click')
 </script>
 <?php
 $cart->reset(true);  ?>
-    
-    
-    
+
+
+
     </td>
 <!-- body_text_eof //-->
     <td width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="0" cellpadding="2">
@@ -109,21 +109,15 @@ $cart->reset(true);  ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>
-<?php 
+<?php
 
 } else {
-   echo 'Error to get preference key, please contact the store owner'; 
+   echo 'Error to get preference key, please contact the store owner';
 }
 
-
-
-
 if(!isset($_REQUEST['bt']) && isset($_REQUEST['id']) && isset($_REQUEST['topic']) && $_REQUEST['topic'] = 'payment'){
-  
   $mb = new mercadopago();
   $status = $mb->retorno($_REQUEST['id']);
-
- }
-
+}
 
 ?>
