@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/4f179406f62cdb5e0c8d/maintainability)](https://codeclimate.com/github/mercadopago/cart-oscommerce/maintainability)
+
 # osCommerce - Mercado Pago Module (v2.3)
 ---
 
